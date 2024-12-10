@@ -34,22 +34,27 @@
     <script>
         const measureName = "initCoreAds";
 
-        const { name, duration } = window.performance.measure((measureName, startMark, endMark));
-        window?.DD_RUM?.onReady(function () {
-            window?.DD_RUM?.addTiming(name, duration)
-        })
+        performance.mark("startMark");
+        setTimeout(() => {
+            performance.mark("endMark");
 
-        // mark
-        window?.performance?.mark(name)
-        window?.DD_RUM?.onReady(function () {
-            window?.DD_RUM?.addTiming(name)
-        })
+            const { name, duration } = window.performance.measure((measureName, "startMark", "endMark"));
+            window?.DD_RUM?.onReady(function () {
+                window?.DD_RUM?.addTiming(name, duration)
+            })
+
+            // mark
+            window?.performance?.mark(name)
+            window?.DD_RUM?.onReady(function () {
+                window?.DD_RUM?.addTiming(name)
+            })
+        }, 1000);
 
 
         // TCF_Done 
         //measure('coreAds_TCF_done', 'navigationStart')
 
-        // Init COR 
+        // Init COR
         //mark('coreAds_initCoreAds')
     </script>
 </head>
