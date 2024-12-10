@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Timing onReady Testing</title>
+    <script>
+        (function (h, o, u, n, d) {
+            h = h[d] = h[d] || { q: [], onReady: function (c) { h.q.push(c) } }
+            d = o.createElement(u); d.async = 1; d.src = n
+            n = o.getElementsByTagName(u)[0]; n.parentNode.insertBefore(d, n)
+        })(window, document, 'script', 'https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js', 'DD_RUM')
+        window.DD_RUM.onReady(function () {
+            window.DD_RUM.init({
+                clientToken: 'pub2e7618e091d1249eaf079cd0fbb90797',
+                applicationId: '58075c9e-ed92-4223-9f84-bbaba680d4b1',
+                // `site` refers to the Datadog site parameter of your organization
+                // see https://docs.datadoghq.com/getting_started/site/
+                site: 'datadoghq.com',
+                service: 'datadogbrowserperformancetiming',
+                env: 'staging',
+                // Specify a version number to identify the deployed version of your application in Datadog
+                // version: '1.0.0',
+                sessionSampleRate: 100,
+                sessionReplaySampleRate: 100,
+                trackUserInteractions: true,
+                trackResources: true,
+                trackLongTasks: true,
+                defaultPrivacyLevel: 'mask-user-input',
+            });
+        })
+    </script>
+    <script>
+        const { name, duration } = window.performance.measure((measureName, startMark, endMark));
+        window?.DD_RUM?.onReady(function () {
+            window?.DD_RUM?.addTiming(name, duration)
+        })
+
+        // mark
+        window?.performance?.mark(name)
+        window?.DD_RUM?.onReady(function () {
+            window?.DD_RUM?.addTiming(name)
+        })
+
+
+        // TCF_Done 
+        //measure('coreAds_TCF_done', 'navigationStart')
+
+        // Init COR 
+        //mark('coreAds_initCoreAds')
+    </script>
+</head>
+
+<body>
+    <h1>Performance Timing</h1>
+
+</body>
+
+</html>
