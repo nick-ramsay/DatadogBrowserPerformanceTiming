@@ -38,8 +38,11 @@
         setTimeout(() => {
             performance.mark("endMark");
 
-            const { name, duration } = window.performance.measure((measureName, "startMark", "endMark"));
+            const { name, duration } = window.performance.measure(("measureName", "startMark", "endMark"));
+            console.log(name);
+            console.log(duration);
             window?.DD_RUM?.onReady(function () {
+                console.log("Called ddfunction")
                 window?.DD_RUM?.addTiming(name, duration)
             })
 
