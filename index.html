@@ -32,6 +32,8 @@
         })
     </script>
     <script>
+        const measureName = "initCoreAds";
+
         const { name, duration } = window.performance.measure((measureName, startMark, endMark));
         window?.DD_RUM?.onReady(function () {
             window?.DD_RUM?.addTiming(name, duration)
