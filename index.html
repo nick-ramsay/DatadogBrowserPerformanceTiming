@@ -33,24 +33,24 @@
     </script>
     <script>
         const measureName = "initCoreAds";
-
-        performance.mark("startMark");
+        
+        window.performance.mark("startMark");
         setTimeout(() => {
-            performance.mark("endMark");
+            window.performance.mark("endMark");
 
-            const { name, duration } = window.performance.measure(("measureName", "startMark", "endMark"));
+            const { name, duration } = window.performance.measure(("myMeasureName", "startMark", "endMark"));
             console.log(name);
             console.log(duration);
             window?.DD_RUM?.onReady(function () {
                 console.log("Called ddfunction")
-                window?.DD_RUM?.addTiming(name, duration)
+                window?.DD_RUM?.addTiming(name1, duration1)
             })
 
             // mark
-            window?.performance?.mark(name)
-            window?.DD_RUM?.onReady(function () {
-                window?.DD_RUM?.addTiming(name)
-            })
+            // window?.performance?.mark(name)
+            // window?.DD_RUM?.onReady(function () {
+            //     window?.DD_RUM?.addTiming(name)
+            // })
         }, 1000);
 
 
